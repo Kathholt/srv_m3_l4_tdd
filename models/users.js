@@ -1,25 +1,25 @@
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, DataTypes) => {
 	const Users = sequelize.define('Users', {
-			FirstName: Sequelize.DataTypes.STRING,
-			LastName: Sequelize.DataTypes.STRING,
-			Username: {
-					type: Sequelize.DataTypes.STRING,
-					allowNull: false,
-					unique: false
-			},
-			EncryptedPassword: {
-					type: Sequelize.DataTypes.BLOB,
-					allowNull: false
-			},
-			Salt: {
-					type: Sequelize.DataTypes.BLOB,
-					allowNull: false
-			},
+		FirstName: DataTypes.STRING,
+		LastName: DataTypes.STRING,
+		Username: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			unique: true
+		},
+		EncryptedPassword: {
+			type: DataTypes.BLOB,
+			allowNull: false
+		},
+		Salt: {
+			type: DataTypes.BLOB,
+			allowNull: false
+		},
 	},{
-			timestamps: false
+		timestamps: false
 	});
 	Users.associate = function(models) {
-		Users.hasMany(models.Bookmarks);
-};
-return Users
-}
+	  Users.hasMany(models.Bookmarks);
+  };
+  return Users
+  }

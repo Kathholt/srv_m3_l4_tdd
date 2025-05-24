@@ -1,14 +1,11 @@
-module.exports = (sequelize, Sequelize) => {
-	const Bookmarks = sequelize.define(
-		'Bookmarks',
-		{
-			Name: Sequelize.DataTypes.STRING,
-			url: Sequelize.DataTypes.STRING,
-		},
-		{
-			timestamps: false,
-		}
-	);
+module.exports = (sequelize, DataTypes) => {
+	const Bookmarks = sequelize.define('Bookmarks', {
+		Name: DataTypes.STRING,
+		url: DataTypes.STRING,
+	}, {
+		timestamps: false,
+	});
 
 	return Bookmarks;
 };
+

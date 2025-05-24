@@ -7,8 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('tdd:server');
 var http = require('http');
-var db = require('../models');
-db.sequelize.sync({ force: false, logging: true });
+//var db = require('../models');
+//db.sequelize.sync({ force: false, logging: true });
 
 /**
  * Get port from environment and store in Express.

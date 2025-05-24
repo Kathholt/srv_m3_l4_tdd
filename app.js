@@ -1,8 +1,17 @@
+require('dotenv').config();
+
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const jwt = require('jsonwebtoken');
+
+const token = jwt.sign({ userId: 123 }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+jwt.verify(token, process.env.TOKEN_SECRET);
+
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

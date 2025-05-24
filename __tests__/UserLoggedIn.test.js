@@ -12,3 +12,8 @@ it('User Logged in test', async () => {
   expect(response.body).toHaveProperty('data.token');
   expect(response.body).toHaveProperty('data.username');
 });
+
+afterAll(async () => {
+    await new Promise(resolve => setTimeout(resolve, 100)); // optional wait
+    await require('../models').sequelize.close(); // clean DB connection
+  });

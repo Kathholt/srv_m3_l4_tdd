@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var crypto = require('crypto');
 const db = require('../models');
+const jwt = require('jsonwebtoken');
+
 const UserService = require('../services/UserService');
 const userService = new UserService(db);
 /* GET users listing. */
@@ -46,13 +48,7 @@ router.get('/', function(req, res, next) {
 			return res.status(401).send({ result: 'Incorrect email or password' });
 		  }
 		  let token;
-		  try {
-			token = jwt.sign({ id: dbUser.dataValues.Id, username: dbUser.dataValues.Username }, process.env.TOKEN_SECRET, { expiresIn: '2h' });
-		  } catch (err) {
-			return res.status(400).send({
-			  result: 'Something went wrong when creating JWT token',
-			});
-		  }
+		  token = jwt.sign({ id: dbUser.dataValues.Id, username: dbUser.dataValues.Username }, process.env.TOKEN_SECRET, { expiresIn: '2h' });
 		  return res.status(200).send({
 			message: 'User logged in successfully',
 			data: {
@@ -68,15 +64,8 @@ router.get('/', function(req, res, next) {
   });
 
 const EncodeJWT = (id, username) => {
-	try {
-		token = jwt.sign({ id: id, username: username }, process.env.TOKEN_SECRET, { expiresIn: '2h' });
-		return token;
-	} catch (err) {
-		return res.jsend.error({
-			statusCode: 400,
-			result: 'Something went wrong when creating JWT token',
-		});
-	}
+	token = jwt.sign({ id: id, username: username }, process.env.TOKEN_SECRET, { expiresIn: '2h' });
+	return token;
 };
 
 module.exports = router;
